@@ -4,9 +4,24 @@ using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
-    // Update is called once per frame
-    void Update()
+    private Rigidbody ballRigidBody;
+    private void Start()
     {
-        Debug.Log(this.transform.eulerAngles);
+        ballRigidBody = this.GetComponent<Rigidbody>();
+        var ballData = new BallData(5);
+        Debug.Log(ballData.GetHitPoint);//5
+    }
+    public void BallMove(Vector3 direction)
+    {
+        ballRigidBody.AddForce(direction);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name == "Cube")
+        {
+            Debug.Log("Damage");
+        }
+        
     }
 }
